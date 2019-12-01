@@ -5,10 +5,6 @@
  */
 package view;
 
-/**
- *
- * @author Sonia
- */
 public class InterfaceGrafica extends javax.swing.JFrame {
 
     /**
