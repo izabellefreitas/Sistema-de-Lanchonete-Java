@@ -16,7 +16,7 @@ public class Lanchonete {
         int cpfClient;
         String pedidoClient;
         
-        System.out.println("SEJA BEM-VINDX A LANCHONETE DA IZA");
+        System.out.println("SEJA BEM-VINDX A LANCHONETE MISTER LANCHES");
         System.out.println("\n\nDigite o seu nome: ");
         nomeClient = nomeCliente.next();
         System.out.println("\nDigite o seu cpf: ");
