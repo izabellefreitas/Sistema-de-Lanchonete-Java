@@ -1,18 +1,27 @@
 package view;
 
 import java.util.ArrayList;
-
 import control.Controlador;
+import java.util.Scanner;
 
 public class Lanchonete {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         
         Controlador c = new Controlador();
-               
+        Scanner nomeCliente  = new Scanner(System.in);
+        Scanner cpfCliente  = new Scanner(System.in);
+        Scanner pedido = new Scanner(System.in);
+        String nomeClient;
+        int cpfClient;
+        String pedidoClient;
+        
+        System.out.println("SEJA BEM-VINDX A LANCHONETE DA IZA");
+        System.out.println("\n\nDigite o seu nome: ");
+        nomeClient = nomeCliente.next();
+        System.out.println("\nDigite o seu cpf: ");
+        cpfClient = cpfCliente.nextInt();
+        
         System.out.println("\t\tMenu\n");
         System.out.println("\tComidas\n");
         imprimirMenuComida(c);
@@ -24,7 +33,7 @@ public class Lanchonete {
         imprimirMenuCombo(c);
         
         System.out.println("\n\nInforme o seu pedido: ");
-        
+        pedidoClient = pedido.next();
     }
 
     private static void imprimirMenuComida(Controlador c)
