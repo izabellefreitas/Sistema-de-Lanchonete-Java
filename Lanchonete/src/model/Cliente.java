@@ -2,11 +2,14 @@ package model;
 
 public class Cliente {
     private String nomeCliente;
-    private int cpf;
+    private int numPedido;
     
-    public Cliente(String nomeCliente, int cpf){
+    public Cliente(String nomeCliente, int numPedido){
         this.nomeCliente = nomeCliente;
-        this.cpf = cpf;
+        this.numPedido = 0;
+        
+        for(int i = 0; i < 1000; i++)
+            this.numPedido += 1;
     }
     
     public void setNomeCliente(String nomeCliente)
@@ -19,13 +22,13 @@ public class Cliente {
         return this.nomeCliente;
     }
     
-    public void setCpf(int cpf)
+    public void setNumPedido(int numPedido)
     {
-        this.cpf=cpf;
+        this.numPedido=numPedido;
     }
     
-    public int getCpf()
+    public int getNumPedido()
     {
-        return this.cpf;
+        return this.numPedido;
     }
 }

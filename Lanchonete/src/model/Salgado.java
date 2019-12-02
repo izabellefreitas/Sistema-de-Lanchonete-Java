@@ -3,8 +3,8 @@ package model;
 public class Salgado extends Comida{
     private String massa;
     
-    public Salgado (String massa, String carne, String molho, Double valor){
-        super(carne, molho, valor);
+    public Salgado (String nome, String massa, String carne, String molho, Double valor){
+        super(nome, carne, molho, valor);
         this.massa = massa;
     }
     

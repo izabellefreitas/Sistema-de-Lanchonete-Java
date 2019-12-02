@@ -1,21 +1,22 @@
 package model;
 
-public class Bebida {
+public class Bebida implements ILanchonete{
     private String sabor;
-    private String tipoBebida;
+    private String nome;
     private int quantidade;
     private Double valor;
     private static final int[] listaQuant = {300, 400, 500, 700};
 
     public Bebida (String sab, String tipo, Double valor){
         this.sabor=sab;
-        this.tipoBebida=tipo;
+        this.nome=tipo;
         this.valor=valor;
     }
     
-    public Bebida (String sab, String tipo, int quant){
+    public Bebida (String nome, String sab, String tipo, int quant){
+        this.nome=nome;
         this.sabor=sab;
-        this.tipoBebida=tipo;
+        this.nome=tipo;
         this.quantidade=quant;
         
         for(int i = 0; i < 4; i++)
@@ -35,18 +36,20 @@ public class Bebida {
         return this.sabor;
     }
     
-    public void setTipoBebida (String tipoBebida){
-        this.tipoBebida=tipoBebida;
+    public void setNome (String tipoBebida){
+        this.nome=tipoBebida;
     }
     
-    public String getTipoBebida (){
-        return this.tipoBebida;
+    @Override
+    public String getNome (){
+        return this.nome;
     }
     
     public void setValor (Double valor){
         this.valor=valor;
     }
     
+    @Override
     public Double getValor (){
         return this.valor;
     }

@@ -1,12 +1,14 @@
 package model;
 
-public abstract class Comida {
+public abstract class Comida implements ILanchonete {
+    private String nome;
     private String carne;
     private String molho;
     private Double valor;
     
-    public Comida(String carne, String molho, Double valor)
+    public Comida(String nome, String carne, String molho, Double valor)
     {
+        this.nome = nome;
         this.carne = carne;
         this.molho = molho;
         this.valor = valor;
@@ -31,9 +33,16 @@ public abstract class Comida {
     public void setValor (Double valor){
         this.valor=valor;
     }
-
+    
+    @Override
     public Double getValor (){
         return this.valor;
+    }
+    
+    @Override
+    public String getNome()
+    {
+        return this.nome;
     }
       
     @Override

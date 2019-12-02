@@ -2,25 +2,32 @@ package view;
 
 import java.util.ArrayList;
 import control.Controlador;
+import java.util.HashMap;
 import java.util.Scanner;
+import model.Cliente;
 
 public class Lanchonete {
 
     public static void main(String[] args) {
         
         Controlador c = new Controlador();
+        //ArrayList<Cliente> clientes = new ArrayList<>();
+              
         Scanner nomeCliente  = new Scanner(System.in);
-        Scanner cpfCliente  = new Scanner(System.in);
         Scanner pedido = new Scanner(System.in);
+        
         String nomeClient;
-        int cpfClient;
         String pedidoClient;
         
         System.out.println("SEJA BEM-VINDX A LANCHONETE MISTER LANCHES");
         System.out.println("\n\nDigite o seu nome: ");
         nomeClient = nomeCliente.next();
-        System.out.println("\nDigite o seu cpf: ");
-        cpfClient = cpfCliente.nextInt();
+        
+        for (int i = 0; i < 1000; i++){
+            //minha intencao eh fazer uma lista para colocar todos os clintes (com numPedido) 
+            //que fizeram pedidos, para que eu possa gerar a conta de cada cliente.    
+        }
+        
         
         System.out.println("\t\tMenu\n");
         System.out.println("\tComidas\n");
@@ -67,4 +74,5 @@ public class Lanchonete {
             System.out.println(combo);
         }
     } 
+
 }

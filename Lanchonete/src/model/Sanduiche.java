@@ -4,8 +4,8 @@ public class Sanduiche extends Comida{
     private String pao;
     private String recheio;
 
-    public Sanduiche(String pao, String recheio, String carne, String molho, Double valor){
-        super(carne, molho, valor);
+    public Sanduiche(String nome,String pao, String recheio, String carne, String molho, Double valor){
+        super(nome, carne, molho, valor);
         this.pao = pao;
         this.recheio = recheio;
     }

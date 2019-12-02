@@ -3,13 +3,18 @@ package control;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import model.Bebida;
 import model.Combo;
 import model.Comida;
+import model.Pedido;
 import model.Salgado;
 import model.Sanduiche;
 import model.Sobremesa;
+import model.ItemPedido;
+import model.ILanchonete;
 
 public class Controlador
 {
@@ -17,7 +22,8 @@ public class Controlador
     private HashMap<String, Bebida> menuBebida = new HashMap<>();
     private HashMap<String, Sobremesa> menuSobremesa = new HashMap<>();
     private HashMap<String, Combo> menuCombo = new HashMap<>();
-
+    private HashMap<Integer, Pedido> pedidos = new HashMap<>();  
+    
     public Controlador()
     {
         preencherMenuComida();
@@ -25,10 +31,37 @@ public class Controlador
         preencherMenuSobremesa();
         preencherMenuCombo();
     }
-
+    
+    public int criarPedido()
+    {
+        int numPedido = pedidos.size()+1;
+        pedidos.put(numPedido, new Pedido());
+        return numPedido;
+    }
+    
+    public void adicionarCarrinho(int numP, String chave, HashMap<String,Class<? extends ILanchonete>> hash) throws InstantiationException
+    {
+        Pedido aux = pedidos.get(numP);
+        
+        Class<? extends ILanchonete> tipo = hash.get(chave);
+        ILanchonete ins;
+        try {
+            ins = tipo.newInstance();
+            ItemPedido novo = new ItemPedido(ins.getNome(),ins.getValor());
+            aux.adicionarItem(novo);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void addComida(int numP, String nome)
+    {
+        this.adicionarCarrinho(numP, nome, this.menuComida);
+    }
     private void preencherMenuComida()
     {
         this.menuComida.put("X-Tudao", new Sanduiche(
+            "X-Tudao",
             "Pao de Hamburguer",
             "Alface, Tomate, Queijo e Bacon",
             "Picanha",
@@ -38,6 +71,7 @@ public class Controlador
         );
 
         this.menuComida.put("X-Burger", new Sanduiche(
+            "X-Burger",
             "Pao de Hamburguer",
             "Alface, Tomate, Queijo",
             "Tradicional",
@@ -47,6 +81,7 @@ public class Controlador
         );
         
         this.menuComida.put("Coxinha", new Salgado(
+            "Coxinha",    
             "Massa de Coxinha", 
             "Frango", 
             "Ketchup, Maionese e Mostarda",
@@ -55,6 +90,7 @@ public class Controlador
         );
         
         this.menuComida.put("Risole", new Salgado(
+            "Risole",    
             "Massa de Risole", 
             "Carne", 
             "Ketchup, Maionese e Mostarda",
@@ -62,7 +98,8 @@ public class Controlador
             )   
         );
 
-        this.menuComida.put("Croissant", new Salgado(
+        this.menuComida.put("Croissant de Frango", new Salgado(
+            "Croissant de Frango",    
             "Massa Folhada", 
             "Frango", 
             "Ketchup, Maionese e Mostarda",
@@ -70,7 +107,8 @@ public class Controlador
             )   
         );
         
-        this.menuComida.put("Croissant", new Salgado(
+        this.menuComida.put("Croissant de Queijo e Presunto", new Salgado(
+            "Croissant de Queijo e Presunto",    
             "Massa Folhada", 
             "Queijo e Presunto", 
             "Ketchup, Maionese e Mostarda",
@@ -93,26 +131,37 @@ public class Controlador
     {
         this.menuSobremesa.put("Brownie de Chocolate",
             new Sobremesa("Chocolate", "Brownie", 3.00));
+        
         this.menuSobremesa.put("Brownie de Doce de Leite",
             new Sobremesa("Doce de Leite", "Brownie", 3.00));
+        
         this.menuSobremesa.put("Brownie de Nutella", 
             new Sobremesa("Nutella", "Brownie", 3.00));
+        
         this.menuSobremesa.put("Brownie de Amendoim", 
             new Sobremesa("Amendoim", "Brownie", 3.00));
+        
         this.menuSobremesa.put("Torta de Doce de Leite", 
             new Sobremesa("Doce de Leite", "Torta", 5.00));
+        
         this.menuSobremesa.put("Torta de Chocolate", 
             new Sobremesa("Chocolate", "Torta", 5.00));
+        
         this.menuSobremesa.put("Torta de Morango",
             new Sobremesa("Morango", "Torta", 5.00));
+        
         this.menuSobremesa.put("Casquinha de Chocolate", 
             new Sobremesa("Chocolate", "Sorvete", 2.00));
+        
         this.menuSobremesa.put("Casquinha de Baunilha", 
             new Sobremesa("Baunilha", "Sorvete", 2.00));
+        
         this.menuSobremesa.put("Casquinha de Morango", 
             new Sobremesa("Morango", "Sorvete", 2.00));
+        
         this.menuSobremesa.put("Casquinha Mista (C&B)", 
             new Sobremesa("Chocolate com Baunilha", "Sorvete", 2.00));
+        
         this.menuSobremesa.put("Casquinha Mista (M&B)", 
             new Sobremesa("Morango com Baunilha", "Sorvete", 2.00));
     }
@@ -120,46 +169,56 @@ public class Controlador
     private void preencherMenuCombo()
     {
         this.menuCombo.put("Combo 1 - X-Tudao + Coca-Cola",
-            new Combo(this.menuComida.get("X-Tudao"),
+            new Combo("Combo 1 - X-Tudao + Coca-Cola",
+                this.menuComida.get("X-Tudao"),
                 this.menuBebida.get("Guarana Antartica"), 12.00));
         
         this.menuCombo.put("Combo 2 - X-Tudao + Guarana Antartica",
-            new Combo(this.menuComida.get("X-Tudao"), 
+            new Combo("Combo 2 - X-Tudao + Guarana Antartica",
+                this.menuComida.get("X-Tudao"), 
                 this.menuBebida.get("Coca-Cola"), 12.00));
         
         this.menuCombo.put("Combo 3 - X-Burguer + Guarana Antartica",
-            new Combo(this.menuComida.get("X-Burguer"),
+            new Combo("Combo 3 - X-Burguer + Guarana Antartica",
+                this.menuComida.get("X-Burguer"),
                 this.menuBebida.get("Guarana Antartica"), 10.00));
         
         this.menuCombo.put("Combo 4 - X-Burguer + Coca-Cola",
-            new Combo(this.menuComida.get("X-Burguer"),
+            new Combo("Combo 4 - X-Burguer + Coca-Cola",
+                this.menuComida.get("X-Burguer"),
                 this.menuBebida.get("Coca-Cola"), 10.00));
         
         this.menuCombo.put("Combo 5 - Coxinha + Coca-Cola",
-            new Combo(this.menuComida.get("Coxinha"),
+            new Combo("Combo 5 - Coxinha + Coca-Cola",
+                this.menuComida.get("Coxinha"),
                 this.menuBebida.get("Coca-Cola"), 7.00));
         
         this.menuCombo.put("Combo 6 - Coxinha + Guarana Antartica",
-            new Combo(this.menuComida.get("Coxinha"),
+            new Combo("Combo 6 - Coxinha + Guarana Antartica",
+                this.menuComida.get("Coxinha"),
                 this.menuBebida.get("Coca-Cola"), 7.00));
         
         this.menuCombo.put("Combo 7 - Risole + Coca-Cola",
-            new Combo(this.menuComida.get("Risole"),
+            new Combo("Combo 7 - Risole + Coca-Cola",
+                this.menuComida.get("Risole"),
                 this.menuBebida.get("Coca-Cola"), 7.00));
         
         this.menuCombo.put("Combo 8 - Risole + Guarana Antartica",
-            new Combo(this.menuComida.get("Risole"),
+            new Combo("Combo 8 - Risole + Guarana Antartica",
+                this.menuComida.get("Risole"),
                 this.menuBebida.get("Coca-Cola"), 7.00));
         
         this.menuCombo.put("Combo 9 - Croissant + Guarana Antartica",
-            new Combo(this.menuComida.get("Croissant"),
+            new Combo("Combo 9 - Croissant + Guarana Antartica",
+                this.menuComida.get("Croissant"),
                 this.menuBebida.get("Coca-Cola"), 7.00));
         
         this.menuCombo.put("Combo 10 - Croissant + Coca-Cola",
-            new Combo(this.menuComida.get("Croissant"),
+            new Combo("Combo 10 - Croissant + Coca-Cola",
+                this.menuComida.get("Croissant"),
                 this.menuBebida.get("Coca-Cola"), 7.00));
     }
-
+    
     private ArrayList<String> retornaMenu(HashMap nome)
     {
         ArrayList<String> menu = new ArrayList<>();
