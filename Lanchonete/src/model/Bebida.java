@@ -58,7 +58,7 @@ public class Bebida implements ILanchonete{
         this.quantidade=quantidade;
     }
     
-    public double getQuantidade (){
+    public int getQuantidade (){
         return this.quantidade;
     }  
     
@@ -68,7 +68,7 @@ public class Bebida implements ILanchonete{
         return "\tPreco: RS " + this.valor;
     }
     
-    public double Beber (){
+    public int beber (){
        return this.quantidade;
     }
 }

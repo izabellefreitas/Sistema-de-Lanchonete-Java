@@ -43,6 +43,10 @@ public class Combo implements ILanchonete{
         return this.nome;
     } 
     
+     public void setNome (String nome){
+        this.nome=nome;
+    }
+    
     @Override
     public String toString()
     {

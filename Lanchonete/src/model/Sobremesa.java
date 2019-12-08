@@ -1,8 +1,10 @@
 package model;
 
-public class Sobremesa {
+public class Sobremesa implements ILanchonete
+{
     private String saborSobremesa;
     private String tipoSobremesa;
+    private String nome;
     private Double valor;
     
     public Sobremesa(String saborSob, String tipoSob, Double valor)
@@ -35,10 +37,21 @@ public class Sobremesa {
     public Double getValor (){
         return this.valor;
     }
-      
+    
+     @Override
+    public String getNome(){
+        return this.nome;
+    } 
+    
+    public void setNome(String nome)
+    {
+        this.nome=nome;
+    }
+    
     @Override
     public String toString()
     {
         return "\tPreco: RS " + this.valor;
     }
+ 
 }

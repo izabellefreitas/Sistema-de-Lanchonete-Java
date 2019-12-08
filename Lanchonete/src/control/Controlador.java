@@ -58,6 +58,22 @@ public class Controlador
     {
         this.adicionarCarrinho(numP, nome, this.menuComida);
     }
+    
+    public void addBebida(int numP, String nome)
+    {
+        this.adicionarCarrinho(numP, nome, this.menuBebida);
+    }
+    
+    public void addCombo(int numP, String nome)
+    {
+        this.adicionarCarrinho(numP, nome, this.menuCombo);
+    }
+    
+    public void addSobremesa(int numP, String nome)
+    {
+        this.adicionarCarrinho(numP, nome, this.menuSobremesa);
+    }
+    
     private void preencherMenuComida()
     {
         this.menuComida.put("X-Tudao", new Sanduiche(

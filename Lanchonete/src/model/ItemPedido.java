@@ -13,7 +13,8 @@ public class ItemPedido {
     }
 
     public ItemPedido(String nome, Double valor) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.nome = nome;
+        this.valor = valor;
     }
 
     public void setNome(String nome){
