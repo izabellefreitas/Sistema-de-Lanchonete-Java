@@ -22,7 +22,8 @@ public class Controlador
     private HashMap<String, Bebida> menuBebida = new HashMap<>();
     private HashMap<String, Sobremesa> menuSobremesa = new HashMap<>();
     private HashMap<String, Combo> menuCombo = new HashMap<>();
-    private HashMap<Integer, Pedido> pedidos = new HashMap<>();  
+    private HashMap<Integer, Pedido> pedidos = new HashMap<>();
+    private HashMap<Integer, Cliente> clientes = new HashMap<>();    
     
     public Controlador()
     {
@@ -38,40 +39,44 @@ public class Controlador
         pedidos.put(numPedido, new Pedido());
         return numPedido;
     }
-    
-    public void adicionarCarrinho(int numP, String chave, HashMap<String,Class<? extends ILanchonete>> hash) throws InstantiationException
+    public double calculaTotal(int numP)
     {
-        Pedido aux = pedidos.get(numP);
+        return pedidos.get(numP).calculaTotal();
+    }    
+    public void adicionarCarrinho(int numP, String nome, Double valor)
+    {
+        ItemPedido novo = new ItemPedido(nome,valor);
         
-        Class<? extends ILanchonete> tipo = hash.get(chave);
-        ILanchonete ins;
-        try {
-            ins = tipo.newInstance();
-            ItemPedido novo = new ItemPedido(ins.getNome(),ins.getValor());
-            aux.adicionarItem(novo);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(Controlador.class.getName()).log(Level.SEVERE, null, ex);
+        Pedido aux = pedidos.get(numP);
+        if (aux == null) {
+            numP = criarPedido();
+            aux = pedidos.get(numP);
         }
+        aux.adicionarItem(novo);
     }
     
     public void addComida(int numP, String nome)
     {
-        this.adicionarCarrinho(numP, nome, this.menuComida);
+        Comida aux = menuComida.get(nome);
+        this.adicionarCarrinho(numP, nome, aux.getValor());
     }
     
     public void addBebida(int numP, String nome)
     {
-        this.adicionarCarrinho(numP, nome, this.menuBebida);
+        Bebida aux = menuBebida.get(nome);
+        this.adicionarCarrinho(numP, nome, aux.getValor());
     }
     
     public void addCombo(int numP, String nome)
     {
-        this.adicionarCarrinho(numP, nome, this.menuCombo);
+        Combo aux = menuCombo.get(nome);
+        this.adicionarCarrinho(numP, nome, aux.getValor());
     }
     
     public void addSobremesa(int numP, String nome)
     {
-        this.adicionarCarrinho(numP, nome, this.menuSobremesa);
+        Sobremesa aux = menuSobremesa.get(nome);
+        this.adicionarCarrinho(numP, nome, aux.getValor());
     }
     
     private void preencherMenuComida()
@@ -267,6 +272,12 @@ public class Controlador
     public ArrayList<String> retornaMenuCombo()
     {
         return this.retornaMenu(menuCombo);
+    }
+
+    public void cadastrarCliente(String nome, int numP)
+    {
+        Cliente c = new Cliente(nome, numP);
+        this.clientes.put(nome, c);
     }
 
 }
