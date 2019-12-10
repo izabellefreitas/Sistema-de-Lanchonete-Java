@@ -6,15 +6,7 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import model.Bebida;
-import model.Combo;
-import model.Comida;
-import model.Pedido;
-import model.Salgado;
-import model.Sanduiche;
-import model.Sobremesa;
-import model.ItemPedido;
-import model.ILanchonete;
+import model.*;
 
 public class Controlador
 {
@@ -23,7 +15,7 @@ public class Controlador
     private HashMap<String, Sobremesa> menuSobremesa = new HashMap<>();
     private HashMap<String, Combo> menuCombo = new HashMap<>();
     private HashMap<Integer, Pedido> pedidos = new HashMap<>();
-    private HashMap<Integer, Cliente> clientes = new HashMap<>();    
+    private HashMap<String, Cliente> clientes = new HashMap<>();
     
     public Controlador()
     {
