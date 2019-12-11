@@ -6,10 +6,7 @@ public class Cliente {
     
     public Cliente(String nomeCliente, int numPedido){
         this.nomeCliente = nomeCliente;
-        this.numPedido = 0;
-        
-        for(int i = 0; i < 1000; i++)
-            this.numPedido += 1;
+        this.numPedido = numPedido;
     }
     
     public void setNomeCliente(String nomeCliente)

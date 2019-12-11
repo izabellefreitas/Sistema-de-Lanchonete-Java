@@ -3,9 +3,9 @@ package model;
 import java.util.ArrayList;
 
 public class Pedido{
+
     ArrayList<ItemPedido> itens = new ArrayList<>();
-    private int numPedido;
-    
+
     public double calculaTotal()
     {
         double soma = 0;

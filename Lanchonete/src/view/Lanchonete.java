@@ -20,7 +20,7 @@ public class Lanchonete {
         Scanner s = new Scanner(System.in);
         nomeClient = s.next();
         
-        System.out.println("\n\nDigite o numero do pedido: ");
+        System.out.println("\n\nDigite o numero da mesa: ");
         pedidoClient = s.nextInt();
         
         c.cadastrarCliente(nomeClient, pedidoClient);

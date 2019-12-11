@@ -3,8 +3,6 @@ package control;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import model.*;
 
@@ -31,10 +29,12 @@ public class Controlador
         pedidos.put(numPedido, new Pedido());
         return numPedido;
     }
+
     public double calculaTotal(int numP)
     {
         return pedidos.get(numP).calculaTotal();
-    }    
+    }
+
     public void adicionarCarrinho(int numP, String nome, Double valor)
     {
         ItemPedido novo = new ItemPedido(nome,valor);
